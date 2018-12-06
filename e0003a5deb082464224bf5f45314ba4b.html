@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+</head>
+<body>
+        <button class="btn1">1</button>
+       <button class="btn2">2</button>
+       <button class="btn3">3</button>
+       
+    <div class="a1">
+    </div>
+    <script>
+    var msg = "ask"
+    $(".btn1").click(function(){
+       fun('job')
+    })
+    $(".btn2").click(function(){
+       fun("good")
+    })
+    $(".btn3").click(function(){
+       fun("share")
+    })
+    function fun(msg){
+        $.ajax({
+			type:"get",
+			url:"https://cnodejs.org/api/v1/topics",
+			data:{page:1,tab:msg,limit :50},
+            dataType:"json",
+			success(data){
+				console.log(data) 
+                var str=""
+                for(i of data.data){
+                    str+=`
+                <p>${i.title}</p>
+                `
+                }
+                $(".a1").html(str)
+			}
+		});
+    }
+    fun("ask")
+   
+
+    </script>
+</body>
+</html>
